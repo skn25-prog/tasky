@@ -24,3 +24,11 @@ kubectl get pods -n kube-system | grep aws-load-balancer-controller
 kubectl get pods
 kubectl get svc
 kubectl get ingress tasky-ingress
+
+eksctl create iamserviceaccount \
+  --cluster=skn-eks-cluster \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --attach-policy-arn=arn:aws:iam::298249408775:policy/AWSLoadBalancerControllerIAMPolicy3 \
+  --approve \
+  --override-existing-serviceaccounts
