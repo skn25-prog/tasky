@@ -17,7 +17,7 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   --set clusterName=skn-eks-cluster \
   --set serviceAccount.create=true \
   --set region=ap-south-1 \
-  --set vpcId=vpc-00f6ed94fa75848b6 \
+  --set vpcId=vpc-0fb3444fba4aa183c \
   --set serviceAccount.name=aws-load-balancer-controller
 
 kubectl get pods -n kube-system | grep aws-load-balancer-controller
@@ -29,6 +29,13 @@ eksctl create iamserviceaccount \
   --cluster=skn-eks-cluster \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
-  --attach-policy-arn=arn:aws:iam::298249408775:policy/AWSLoadBalancerControllerIAMPolicy3 \
+  --attach-policy-arn=arn:aws:iam::231037026514:policy/AWSLoadBalancerControllerIAMPolicy3 \
   --approve \
   --override-existing-serviceaccounts
+
+
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+
+sudo systemctl restart mongod
